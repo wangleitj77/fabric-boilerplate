@@ -55,6 +55,6 @@ function User   (   id,
 var method = User.prototype;
 
 // Add a method to the User prototype
-method.example = function() { return true }
+method.example = function() { return true };
 
 module.exports = User;
