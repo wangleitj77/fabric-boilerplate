@@ -38,7 +38,7 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 		return nil, t.addTestdata(stub, args[0])
 	} else if functionName == "createThing" {
 		thingAsJSON := args[0]
-		fmt.Printf("createThing got first param: " + thingAsJSON);
+		fmt.Printf("createThing got first param: " + thingAsJSON)
 		
 		var thing entities.Thing
 		if err := json.Unmarshal([]byte(thingAsJSON), &thing); err != nil {
@@ -52,7 +52,7 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 		if err != nil {
 			return nil, errors.New("Error marshalling thing, reason: " + err.Error())
 		}
-		fmt.Printf("createThing thing.ThingID = "+ thing.ThingID);
+		fmt.Printf("createThing thing.ThingID = "+ thing.ThingID)
 		
 		util.StoreObjectInChain(stub, thing.ThingID, util.ThingsIndexName, thingAsBytes)
 
@@ -113,6 +113,7 @@ func main() {
 	logger.SetLevel(shim.LogInfo)
 
 	//logLevel, _ := shim.LogLevel(os.Getenv("SHIM_LOGGING_LEVEL"))
+	fmt.Printf('os log level: %s', os.Getenv("SHIM_LOGGING_LEVEL"))
 	logLevel, _ := shim.LogLevel("INFO")
 	shim.SetLoggingLevel(logLevel)
 
