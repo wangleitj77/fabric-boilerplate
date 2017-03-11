@@ -38,17 +38,22 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 		return nil, t.addTestdata(stub, args[0])
 	} else if functionName == "createThing" {
 		thingAsJSON := args[0]
-
+		logger.Infof("createThing got first param: " + thingAsJSON);
+		
 		var thing entities.Thing
 		if err := json.Unmarshal([]byte(thingAsJSON), &thing); err != nil {
 			return nil, errors.New("Error while unmarshalling thing, reason: " + err.Error())
 		}
 
+
+
+	
 		thingAsBytes, err := json.Marshal(thing);
 		if err != nil {
 			return nil, errors.New("Error marshalling thing, reason: " + err.Error())
 		}
-
+		logger.Infof("createThing thing.ThingID = "+ thing.ThingID);
+		
 		util.StoreObjectInChain(stub, thing.ThingID, util.ThingsIndexName, thingAsBytes)
 
 		return nil, nil
