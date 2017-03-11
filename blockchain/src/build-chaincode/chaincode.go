@@ -113,7 +113,7 @@ func main() {
 	logger.SetLevel(shim.LogInfo)
 
 	//logLevel, _ := shim.LogLevel(os.Getenv("SHIM_LOGGING_LEVEL"))
-	logLevel, _ := shim.LogLevel("DEBUG")
+	logLevel, _ := shim.LogLevel("INFO")
 	shim.SetLoggingLevel(logLevel)
 
 	err := shim.Start(new(Chaincode))
